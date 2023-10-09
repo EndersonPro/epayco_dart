@@ -3,6 +3,7 @@ library epayco_dart;
 import 'package:epayco_dart/data/models/api_responses/get_banks.dart';
 import 'package:epayco_dart/data/models/api_responses/get_document_types.dart';
 import 'package:epayco_dart/data/models/auth_response.dart';
+import 'package:epayco_dart/data/models/pse_confirm_transaction.dart';
 import 'package:epayco_dart/data/models/pse_transaction.dart';
 import 'package:epayco_dart/data/models/pse_transaction_response.dart';
 import 'package:epayco_dart/data/repositories/auth_repository.dart';
@@ -50,6 +51,23 @@ class EPayco {
     final masterListRepository = MasterListRepositoryImpl();
     final result = await masterListRepository.getDocumentTypes(
       token: _token!,
+    );
+    return result.fold(
+      (l) => throw l,
+      (r) => r,
+    );
+  }
+
+  Future<PseConfirmTransactionResponse?> confirmTransaction(
+    String transactionId,
+  ) async {
+    assert(_token != null, """
+        token is null please call `getToken()`
+    """);
+    final pseRepository = PseRepositoryImpl();
+    final result = await pseRepository.confirmTransaction(
+      token: _token!,
+      transactionId: transactionId,
     );
     return result.fold(
       (l) => throw l,

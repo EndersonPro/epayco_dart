@@ -2,6 +2,7 @@ import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:epayco_dart/data/http/http.dart';
 import 'package:epayco_dart/data/models/api_responses/get_banks.dart';
+import 'package:epayco_dart/data/models/pse_confirm_transaction.dart';
 import 'package:epayco_dart/data/models/pse_transaction.dart';
 import 'package:epayco_dart/data/models/pse_transaction_response.dart';
 import 'package:epayco_dart/domain/entities/api_responses/get_banks_entity.dart';
@@ -53,14 +54,56 @@ class PseRepositoryImpl implements IPseRepository {
         data: (transaction as PSETransactionModel).toJson(),
       );
 
-      final isSuccess = response.data?.success ?? false;
+      final isSuccess = response.data?['success'] ?? false;
 
       if (isSuccess) {
-        return Right(response.data!);
+        return Right(PseTransactionResponse.fromJson(
+          response.data,
+        ));
       } else {
         return Left(
           Failure(
-            message: response.data?.textResponse ?? 'Transaction failed',
+            message: response.data?['textResponse'] ?? 'Transaction failed',
+          ),
+        );
+      }
+    } catch (e) {
+      return Left(
+        Failure(
+          message: e.toString(),
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<Either<Failure, PseConfirmTransactionResponse>> confirmTransaction({
+    required String token,
+    required String transactionId,
+  }) async {
+    try {
+      final response = await httpClient.post(
+        '/payment/pse/transaction',
+        options: Options(
+          headers: {
+            'Authorization': 'Bearer $token',
+          },
+        ),
+        data: {
+          'transactionID': int.parse(transactionId),
+        },
+      );
+
+      final isSuccess = response.data?['success'] ?? false;
+
+      if (isSuccess) {
+        return Right(PseConfirmTransactionResponse.fromJson(
+          response.data,
+        ));
+      } else {
+        return Left(
+          Failure(
+            message: response.data?['text_response'] ?? 'Transaction failed',
           ),
         );
       }
