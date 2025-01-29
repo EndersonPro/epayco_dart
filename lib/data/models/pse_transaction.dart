@@ -22,6 +22,8 @@ class PSETransactionModel extends PseTransactionEntity {
     super.taxBase,
     super.typePerson,
     super.urlConfirmation,
+    required super.extra1,
+    required super.extra2,
   });
 
   factory PSETransactionModel.fromJson(Map<String, dynamic> json) =>
@@ -46,6 +48,8 @@ class PSETransactionModel extends PseTransactionEntity {
         taxBase: json['taxBase'],
         typePerson: json['typePerson'],
         urlConfirmation: json['urlConfirmation'],
+        extra1: json['extra1'],
+        extra2: json['extra2'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -69,6 +73,8 @@ class PSETransactionModel extends PseTransactionEntity {
         'taxBase': taxBase,
         'typePerson': typePerson,
         'urlConfirmation': urlConfirmation,
+        'extra1': extra1,
+        'extra2': extra2,
       };
 
   @override
@@ -93,6 +99,9 @@ class PSETransactionModel extends PseTransactionEntity {
         tax: $tax, 
         taxBase: $taxBase, 
         typePerson: $typePerson, 
-        urlConfirmation: $urlConfirmation''';
+        urlConfirmation: $urlConfirmation
+        extra1: $extra1
+        extra2: $extra2
+        ''';
   }
 }

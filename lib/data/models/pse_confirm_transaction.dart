@@ -16,17 +16,17 @@ class PseConfirmTransactionResponse {
   factory PseConfirmTransactionResponse.fromJson(Map<String, dynamic> json) =>
       PseConfirmTransactionResponse(
         success: json['success'],
-        titleResponse: json['title_response'],
-        textResponse: json['text_response'],
-        lastAction: json['last_action'],
+        titleResponse: json['titleResponse'],
+        textResponse: json['textResponse'],
+        lastAction: json['lastAction'],
         data: Data.fromJson(json['data']),
       );
 
   Map<String, dynamic> toJson() => {
         'success': success,
-        'title_response': titleResponse,
-        'text_response': textResponse,
-        'last_action': lastAction,
+        'titleResponse': titleResponse,
+        'textResponse': textResponse,
+        'lastAction': lastAction,
         'data': data?.toJson(),
       };
 
@@ -121,8 +121,8 @@ class Data {
         ciudad: json['ciudad'],
         direccion: json['direccion'],
         indPais: json['ind_pais'],
-        transactionId: json['transaction_id'],
-        ticketId: json['ticket_id'],
+        transactionId: json['transactionID'],
+        ticketId: json['ticketId'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -151,8 +151,8 @@ class Data {
         'ciudad': ciudad,
         'direccion': direccion,
         'ind_pais': indPais,
-        'transaction_id': transactionId,
-        'ticket_id': ticketId,
+        'transactionID': transactionId,
+        'ticketId': ticketId,
       };
 
   @override

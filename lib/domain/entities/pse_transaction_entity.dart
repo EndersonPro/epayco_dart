@@ -19,6 +19,8 @@ class PseTransactionEntity {
   final String? address;
   final String? urlConfirmation;
   final String? methodConfimation;
+  final String extra1;
+  final String extra2;
 
   PseTransactionEntity({
     required this.bank,
@@ -41,5 +43,7 @@ class PseTransactionEntity {
     this.address,
     this.urlConfirmation,
     this.methodConfimation,
+    required this.extra1,
+    required this.extra2,
   });
 }

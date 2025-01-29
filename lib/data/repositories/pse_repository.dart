@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:epayco_dart/data/http/http.dart';
+import 'package:epayco_dart/data/http/responses/api_apify_response.dart';
 import 'package:epayco_dart/data/models/api_responses/get_banks.dart';
 import 'package:epayco_dart/data/models/pse_confirm_transaction.dart';
 import 'package:epayco_dart/data/models/pse_transaction.dart';
@@ -54,16 +55,25 @@ class PseRepositoryImpl implements IPseRepository {
         data: (transaction as PSETransactionModel).toJson(),
       );
 
-      final isSuccess = response.data?['success'] ?? false;
+      final responseCast = ApiResponse.fromJson(response.data);
+
+      final isSuccess = responseCast.success ?? false;
 
       if (isSuccess) {
         return Right(PseTransactionResponse.fromJson(
           response.data,
         ));
       } else {
+        if (responseCast.data?.error != null &&
+            responseCast.data?.error?.errores != null &&
+            responseCast.data?.error?.errores?.isNotEmpty == true) {
+          for (var error in responseCast.data!.error!.errores!) {
+            print('[EPaycoError]: ${error.codError}: ${error.errorMessage}');
+          }
+        }
         return Left(
           Failure(
-            message: response.data?['textResponse'] ?? 'Transaction failed',
+            message: responseCast.textResponse ?? 'Transaction failed',
           ),
         );
       }
