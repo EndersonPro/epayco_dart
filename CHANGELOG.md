@@ -1,3 +1,7 @@
+## 0.0.4
+
+* - Update package
+
 ## 0.0.3
 
 * - Convert to dart package
