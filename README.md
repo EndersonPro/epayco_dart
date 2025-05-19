@@ -11,5 +11,5 @@ final EPayco _epaycoClient = EPayco.instance.configure(
     publicKey: '<your-public-key>',
   );
 ```
-
+`dart analyze`
 > Enderson Vizcaino 
