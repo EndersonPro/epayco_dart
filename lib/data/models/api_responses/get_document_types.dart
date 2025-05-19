@@ -33,7 +33,7 @@ class GetDocumentTypes {
       'titleResponse': titleResponse,
       'textResponse': textResponse,
       'lastAction': lastAction,
-      'data': data?.map((e) => (e as Document).toJson()).toList(),
+      'data': data?.map((e) => (e).toJson()).toList(),
     };
   }
 }
