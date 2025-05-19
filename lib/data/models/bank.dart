@@ -1,9 +1,10 @@
-import 'package:epayco_dart/domain/entities/bank_entity.dart';
+class Bank {
+  final String bankCode;
+  final String bankName;
 
-class Bank extends BankEntity {
   Bank({
-    required super.bankCode,
-    required super.bankName,
+    required this.bankCode,
+    required this.bankName,
   });
 
   factory Bank.fromJson(Map<String, dynamic> json) {

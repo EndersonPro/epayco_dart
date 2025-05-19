@@ -1,13 +1,18 @@
 import 'package:epayco_dart/data/models/bank.dart';
-import 'package:epayco_dart/domain/entities/api_responses/get_banks_entity.dart';
 
-class GetBanksResponse extends GetBanksResponseEntity {
+class GetBanksResponse {
+  final bool? success;
+  final String? titleResponse;
+  final String? textResponse;
+  final String? lastAction;
+  final List<Bank>? data;
+
   GetBanksResponse({
-    super.success,
-    super.titleResponse,
-    super.textResponse,
-    super.lastAction,
-    super.data,
+    this.success,
+    this.titleResponse,
+    this.textResponse,
+    this.lastAction,
+    this.data,
   });
 
   factory GetBanksResponse.fromJson(Map<String, dynamic> json) {
