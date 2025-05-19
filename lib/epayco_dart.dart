@@ -2,15 +2,19 @@ library epayco_dart;
 
 import 'package:epayco_dart/data/models/api_responses/get_banks.dart';
 import 'package:epayco_dart/data/models/api_responses/get_document_types.dart';
+import 'package:epayco_dart/data/models/api_responses/tc_transaction.dart';
 import 'package:epayco_dart/data/models/auth_response.dart';
 import 'package:epayco_dart/data/models/pse_confirm_transaction.dart';
 import 'package:epayco_dart/data/models/pse_transaction.dart';
 import 'package:epayco_dart/data/models/pse_transaction_response.dart';
+import 'package:epayco_dart/data/models/tc_transaction.dart';
 import 'package:epayco_dart/data/repositories/auth_repository.dart';
 import 'package:epayco_dart/data/repositories/master_list_repository.dart';
 import 'package:epayco_dart/data/repositories/pse_repository.dart';
+import 'package:epayco_dart/data/repositories/tc_repository.dart';
 
 export 'package:epayco_dart/data/models/models.dart';
+export 'package:epayco_dart/data/status/transaction.dart';
 
 class EPayco {
   String? _publicKey;
@@ -40,7 +44,7 @@ class EPayco {
     );
     return result.fold(
       (l) => throw l,
-      (r) => r as GetBanksResponse,
+      (r) => r,
     );
   }
 
@@ -121,6 +125,22 @@ class EPayco {
         _token = token.token;
         return token;
       },
+    );
+  }
+
+  Future<TcTransactionResponse> payByCreditCard(
+      TcTransaction transaction) async {
+    assert(_token != null, """
+        token is null please call `getToken()`
+    """);
+    final tcRepository = TcRepositoryImpl();
+    final result = await tcRepository.payByCreditCard(
+      token: _token!,
+      transaction: transaction,
+    );
+    return result.fold(
+      (failure) => throw failure,
+      (response) => response,
     );
   }
 }

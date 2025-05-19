@@ -6,14 +6,12 @@ import 'package:epayco_dart/data/models/api_responses/get_banks.dart';
 import 'package:epayco_dart/data/models/pse_confirm_transaction.dart';
 import 'package:epayco_dart/data/models/pse_transaction.dart';
 import 'package:epayco_dart/data/models/pse_transaction_response.dart';
-import 'package:epayco_dart/domain/entities/api_responses/get_banks_entity.dart';
-import 'package:epayco_dart/domain/entities/pse_transaction_entity.dart';
 import 'package:epayco_dart/domain/errors/failure.dart';
 import 'package:epayco_dart/domain/repositories/pse_repository.dart';
 
 class PseRepositoryImpl implements IPseRepository {
   @override
-  Future<Either<Failure, GetBanksResponseEntity>> getBanks({
+  Future<Either<Failure, GetBanksResponse>> getBanks({
     required String token,
   }) async {
     try {
@@ -42,7 +40,7 @@ class PseRepositoryImpl implements IPseRepository {
   @override
   Future<Either<Failure, PseTransactionResponse>> createTransaction({
     required String token,
-    required PseTransactionEntity transaction,
+    required PSETransactionModel transaction,
   }) async {
     try {
       final response = await httpClient.post(
@@ -52,7 +50,7 @@ class PseRepositoryImpl implements IPseRepository {
             'Authorization': 'Bearer $token',
           },
         ),
-        data: (transaction as PSETransactionModel).toJson(),
+        data: transaction.toJson(),
       );
 
       final responseCast = ApiResponse.fromJson(response.data);

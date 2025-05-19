@@ -1,11 +1,14 @@
-import 'package:epayco_dart/domain/entities/document_entity.dart';
+class Document {
+  final int? id;
+  final String? name;
+  final String? cod;
+  final String? description;
 
-class Document extends DocumentEntity {
   Document({
-    super.id,
-    super.name,
-    super.cod,
-    super.description,
+    this.id,
+    this.name,
+    this.cod,
+    this.description,
   });
 
   factory Document.fromJson(Map<String, dynamic> json) {

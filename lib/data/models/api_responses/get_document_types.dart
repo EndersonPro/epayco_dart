@@ -1,20 +1,19 @@
 import 'package:epayco_dart/data/models/document.dart';
-import 'package:epayco_dart/domain/entities/api_responses/get_document_types_entity.dart';
 
-class GetDocumentTypes extends GetDocumentTypesEntity {
+class GetDocumentTypes {
+  final bool? success;
+  final String? titleResponse;
+  final String? textResponse;
+  final String? lastAction;
+  final List<Document>? data;
+
   GetDocumentTypes({
-    bool? success,
-    String? titleResponse,
-    String? textResponse,
-    String? lastAction,
-    List<Document>? data,
-  }) : super(
-          success: success,
-          titleResponse: titleResponse,
-          textResponse: textResponse,
-          lastAction: lastAction,
-          data: data,
-        );
+    this.success,
+    this.titleResponse,
+    this.textResponse,
+    this.lastAction,
+    this.data,
+  });
 
   factory GetDocumentTypes.fromJson(Map<String, dynamic> json) {
     return GetDocumentTypes(

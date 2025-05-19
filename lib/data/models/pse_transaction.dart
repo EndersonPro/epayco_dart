@@ -1,29 +1,52 @@
-import 'package:epayco_dart/domain/entities/pse_transaction_entity.dart';
+class PSETransactionModel {
+  final String bank;
+  final String value;
+  final String docType;
+  final String docNumber;
+  final String name;
+  final String? lastName;
+  final String email;
+  final String cellPhone;
+  final String ip;
+  final String urlResponse;
+  final String? phone;
+  final String? address;
+  final String? currency;
+  final String? description;
+  final String? invoice;
+  final String? methodConfimation;
+  final String? tax;
+  final String? taxBase;
+  final String? typePerson;
+  final String? urlConfirmation;
+  final String extra1;
+  final String extra2;
+  final bool? testMode;
 
-class PSETransactionModel extends PseTransactionEntity {
   PSETransactionModel({
-    required super.bank,
-    required super.value,
-    required super.docType,
-    required super.docNumber,
-    required super.name,
-    super.lastName,
-    required super.email,
-    required super.cellPhone,
-    required super.ip,
-    required super.urlResponse,
-    super.phone,
-    super.address,
-    super.currency,
-    super.description,
-    super.invoice,
-    super.methodConfimation,
-    super.tax,
-    super.taxBase,
-    super.typePerson,
-    super.urlConfirmation,
-    required super.extra1,
-    required super.extra2,
+    required this.bank,
+    required this.value,
+    required this.docType,
+    required this.docNumber,
+    required this.name,
+    this.lastName,
+    required this.email,
+    required this.cellPhone,
+    required this.ip,
+    required this.urlResponse,
+    this.phone,
+    this.address,
+    this.currency,
+    this.description,
+    this.invoice,
+    this.methodConfimation,
+    this.tax,
+    this.taxBase,
+    this.typePerson,
+    this.urlConfirmation,
+    required this.extra1,
+    required this.extra2,
+    this.testMode,
   });
 
   factory PSETransactionModel.fromJson(Map<String, dynamic> json) =>
@@ -50,6 +73,7 @@ class PSETransactionModel extends PseTransactionEntity {
         urlConfirmation: json['urlConfirmation'],
         extra1: json['extra1'],
         extra2: json['extra2'],
+        testMode: json['testMode'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -75,6 +99,7 @@ class PSETransactionModel extends PseTransactionEntity {
         'urlConfirmation': urlConfirmation,
         'extra1': extra1,
         'extra2': extra2,
+        'testMode': testMode,
       };
 
   @override
@@ -102,6 +127,7 @@ class PSETransactionModel extends PseTransactionEntity {
         urlConfirmation: $urlConfirmation
         extra1: $extra1
         extra2: $extra2
+        testMode: $testMode
         ''';
   }
 }

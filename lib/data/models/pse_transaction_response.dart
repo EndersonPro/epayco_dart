@@ -3,7 +3,7 @@ class PseTransactionResponse {
   final String? titleResponse;
   final String? textResponse;
   final String? lastAction;
-  final Data? data;
+  final PseTransactionData? data;
 
   PseTransactionResponse({
     this.success,
@@ -19,7 +19,7 @@ class PseTransactionResponse {
         titleResponse: json['titleResponse'],
         textResponse: json['textResponse'],
         lastAction: json['lastAction'],
-        data: Data.fromJson(json['data']),
+        data: PseTransactionData.fromJson(json['data']),
       );
 
   Map<String, dynamic> toJson() => {
@@ -31,7 +31,7 @@ class PseTransactionResponse {
       };
 }
 
-class Data {
+class PseTransactionData {
   final int? refPayco;
   final String? factura;
   final String? descripcion;
@@ -48,7 +48,7 @@ class Data {
   final String? transactionId;
   final String? ticketId;
 
-  Data({
+  PseTransactionData({
     this.refPayco,
     this.factura,
     this.descripcion,
@@ -66,7 +66,8 @@ class Data {
     this.ticketId,
   });
 
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
+  factory PseTransactionData.fromJson(Map<String, dynamic> json) =>
+      PseTransactionData(
         refPayco: json['ref_payco'],
         factura: json['factura'],
         descripcion: json['descripcion'],
