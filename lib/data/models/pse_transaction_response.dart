@@ -35,7 +35,7 @@ class PseTransactionData {
   final int? refPayco;
   final String? factura;
   final String? descripcion;
-  final int? valor;
+  final double? valor;
   final int? iva;
   final int? baseiva;
   final String? moneda;
